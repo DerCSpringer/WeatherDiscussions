@@ -1,0 +1,303 @@
+
+import Foundation
+
+//  Future: Use resulting array to get locations + abbreviations
+//  Using this URL "https://api.weather.gov/products/types/AFD/locations"
+
+struct CityListViewModel {
+    private var listOfAddedCities = [String]()
+    private var listOfAddedCityAbreviations = [String]()
+    private var listOfAllCities: [String] = ["Albuquerque",
+                                             "Aberdeen",
+                                             "Anchorage",
+                                             "Fairbanks",
+                                             "Juneau",
+                                             "Wakefield",
+                                             "Albany",
+                                             "Amarillo",
+                                             "Gaylord",
+                                             "La Crosse",
+                                             "Binghamton",
+                                             "Bismarck",
+                                             "Birmingham",
+                                             "Boise",
+                                             "Denver",
+                                             "Taunton",
+                                             "Brownsville",
+                                             "Burlington",
+                                             "Buffalo",
+                                             "Billings",
+                                             "Columbia",
+                                             "Caribou",
+                                             "Charleston",
+                                             "Cleveland",
+                                             "Corpus Christi",
+                                             "State College",
+                                             "Cheyenne",
+                                             "Dodge City",
+                                             "Duluth",
+                                             "Des Moines",
+                                             "Detroit/Pontiac",
+                                             "Quad Cities",
+                                             "Kansas City/Pleasant Hill",
+                                             "Eureka",
+                                             "El Paso TX/Santa Teresa NM",
+                                             "Austin/San Antonio",
+                                             "Peachtree City",
+                                             "Grand Forks",
+                                             "Flagstaff",
+                                             "Sioux Falls",
+                                             "Fort Worth",
+                                             "Glasgow",
+                                             "Hastings",
+                                             "Grand Junction",
+                                             "Goodland",
+                                             "Green Bay",
+                                             "Grand Rapids",
+                                             "Greenville-Spartanburg",
+                                             "Tiyan",
+                                             "Gray",
+                                             "Honolulu",
+                                             "Houston/Galveston",
+                                             "Hanford",
+                                             "Huntsville",
+                                             "Wichita",
+                                             "Wilmington",
+                                             "Wilmington",
+                                             "Lincoln",
+                                             "Indianapolis",
+                                             "Northern Indiana",
+                                             "Jackson",
+                                             "Jacksonville",
+                                             "Jackson",
+                                             "Key West",
+                                             "North Platte",
+                                             "Lake Charles",
+                                             "New Orleans",
+                                             "Elko",
+                                             "Louisville",
+                                             "Chicago",
+                                             "Los Angeles/Oxnard",
+                                             "St Louis",
+                                             "Lubbock",
+                                             "Baltimore MD/Washington",
+                                             "Little Rock",
+                                             "Midland/Odessa",
+                                             "Memphis",
+                                             "Miami",
+                                             "Medford",
+                                             "Newport/Morehead City",
+                                             "Milwaukee/Sullivan",
+                                             "Melbourne",
+                                             "Mobile",
+                                             "Twin Cities/Chanhassen",
+                                             "Marquette",
+                                             "Morristown",
+                                             "Missoula",
+                                             "San Francisco",
+                                             "Omaha/Valley",
+                                             "Nashville",
+                                             "Upton",
+                                             "Spokane",
+                                             "Norman",
+                                             "Paducah",
+                                             "Pittsburgh",
+                                             "Pendleton",
+                                             "Mount Holly",
+                                             "Pocatello",
+                                             "Pago Pago",
+                                             "Portland",
+                                             "Phoenix",
+                                             "Pueblo",
+                                             "Raleigh",
+                                             "Reno",
+                                             "Riverton",
+                                             "Charleston",
+                                             "Blacksburg",
+                                             "Seattle",
+                                             "Springfield",
+                                             "San Diego",
+                                             "Shreveport",
+                                             "San Angelo",
+                                             "San Juan",
+                                             "Salt Lake City",
+                                             "Sacramento",
+                                             "Tallahassee",
+                                             "Tampa Bay Ruskin",
+                                             "Great Falls",
+                                             "Topeka",
+                                             "Tulsa",
+                                             "Tucson",
+                                             "Rapid City",
+                                             "Las Vegas"]
+
+    private var listOfAllCityAbbreviations = ["ABQ",
+                                              "ABR",
+                                              "AFC",
+                                              "AFG",
+                                              "AJK",
+                                              "AKQ",
+                                              "ALY",
+                                              "AMA",
+                                              "APX",
+                                              "ARX",
+                                              "BGM",
+                                              "BIS",
+                                              "BMX",
+                                              "BOI",
+                                              "BOU",
+                                              "BOX",
+                                              "BRO",
+                                              "BTV",
+                                              "BUF",
+                                              "BYZ",
+                                              "CAE",
+                                              "CAR",
+                                              "CHS",
+                                              "CLE",
+                                              "CRP",
+                                              "CTP",
+                                              "CYS",
+                                              "DDC",
+                                              "DLH",
+                                              "DMX",
+                                              "DTX",
+                                              "DVN",
+                                              "EAX",
+                                              "EKA",
+                                              "EPZ",
+                                              "EWX",
+                                              "FFC",
+                                              "FGF",
+                                              "FGZ",
+                                              "FSD",
+                                              "FWD",
+                                              "GGW",
+                                              "GID",
+                                              "GJT",
+                                              "GLD",
+                                              "GRB",
+                                              "GRR",
+                                              "GSP",
+                                              "GUM",
+                                              "GYX",
+                                              "HFO",
+                                              "HGX",
+                                              "HNX",
+                                              "HUN",
+                                              "ICT",
+                                              "ILM",
+                                              "ILN",
+                                              "ILX",
+                                              "IND",
+                                              "IWX",
+                                              "JAN",
+                                              "JAX",
+                                              "JKL",
+                                              "KEY",
+                                              "LBF",
+                                              "LCH",
+                                              "LIX",
+                                              "LKN",
+                                              "LMK",
+                                              "LOT",
+                                              "LOX",
+                                              "LSX",
+                                              "LUB",
+                                              "LWX",
+                                              "LZK",
+                                              "MAF",
+                                              "MEG",
+                                              "MFL",
+                                              "MFR",
+                                              "MHX",
+                                              "MKX",
+                                              "MLB",
+                                              "MOB",
+                                              "MPX",
+                                              "MQT",
+                                              "MRX",
+                                              "MSO",
+                                              "MTR",
+                                              "OAX",
+                                              "OHX",
+                                              "OKX",
+                                              "OTX",
+                                              "OUN",
+                                              "PAH",
+                                              "PBZ",
+                                              "PDT",
+                                              "PHI",
+                                              "PIH",
+                                              "PPG",
+                                              "PQR",
+                                              "PSR",
+                                              "PUB",
+                                              "RAH",
+                                              "REV",
+                                              "RIW",
+                                              "RLX",
+                                              "RNK",
+                                              "SEW",
+                                              "SGF",
+                                              "SGX",
+                                              "SHV",
+                                              "SJT",
+                                              "SJU",
+                                              "SLC",
+                                              "STO",
+                                              "TAE",
+                                              "TBW",
+                                              "TFX",
+                                              "TOP",
+                                              "TSA",
+                                              "TWC",
+                                              "UNR",
+                                              "VEF"]
+    var didUpdateCityList: (()->())?
+    
+    func listOfCitiesToDisplay(indexPath: IndexPath) -> String {
+        guard indexPath.row < listOfAddedCities.count else {
+            return ""
+        }
+        return (listOfAddedCityAbreviations[indexPath.row] + " " + listOfAddedCities[indexPath.row])
+    }
+    
+    func numberOfRows() -> Int {
+        listOfAddedCities.count
+    }
+
+    mutating func addCity(indexPath: IndexPath) {
+        guard indexPath.row < listOfAllCities.count else {
+            return
+        }
+        listOfAddedCities.append(listOfAllCities[indexPath.row])
+        listOfAddedCityAbreviations.append(listOfAllCityAbbreviations[indexPath.row])
+        listOfAllCities.remove(at: indexPath.row)
+        listOfAllCityAbbreviations.remove(at: indexPath.row)
+    }
+
+    func allAvailableCityList() -> [String] {
+        Array(zip(listOfAllCityAbbreviations, listOfAllCities)).map {
+            $0 + " " + $1
+        }
+    }
+
+    mutating func removeCity(indexPath: IndexPath) {
+        guard indexPath.row < listOfAddedCities.count else {
+            return
+        }
+        let removedCity = listOfAddedCities.remove(at: indexPath.row)
+        listOfAllCities.append(removedCity)
+
+        let removedCityAbbreviation = listOfAddedCityAbreviations.remove(at: indexPath.row)
+        listOfAllCityAbbreviations.append(removedCityAbbreviation)
+    }
+
+    func cityAbbreviationFor(indexPath: IndexPath) -> String {
+        guard indexPath.row < listOfAddedCityAbreviations.count else {
+            return ""
+        }
+        return listOfAddedCityAbreviations[indexPath.row]
+    }
+}
