@@ -1,6 +1,6 @@
 #  An example of the core concepts of iOS development
 
-This is a simple three screen application.  One screen allows you to view all the noaa weather regions in the country. You can add these weather stations to the favorite screen.  From the favorite screen you can select a weather region to see the latest weather disucussion. 
+This is a simple three screen application.  One screen allows you to view all the NOAA weather regions in the country. You can add these weather stations to the favorite screen.  From the favorite screen you can select a weather region to see the latest weather disucussion. 
 
 **Although simple the app covers the following concepts of iOS development:**
 
